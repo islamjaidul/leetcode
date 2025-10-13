@@ -56,7 +56,29 @@ func sortedSquaresV1(nums []int) []int {
 
 }
 
+func sortedSquaresV2(nums []int) []int {
+	left := 0
+	right := len(nums) - 1
+	result := make([]int, len(nums))
+
+	for i := len(nums) - 1; i >= 0; i-- {
+		leftValue := nums[left] * nums[left]
+		rightValue := nums[right] * nums[right]
+
+		if leftValue > rightValue {
+			result[i] = leftValue
+			left++
+		} else {
+			result[i] = rightValue
+			right--
+		}
+	}
+
+	return result
+}
+
 func main() {
-	input := []int{-1}
-	fmt.Println(sortedSquaresV1(input))
+	input := []int{-1, 1}
+	// fmt.Println(sortedSquaresV1(input))
+	fmt.Println(sortedSquaresV2(input))
 }
