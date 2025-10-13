@@ -2,29 +2,26 @@ package main
 
 import "fmt"
 
-func pivotIndex(nums []int) int {
+func pivotIndexV1(nums []int) int {
 	leftSum := make([]int, len(nums))
 	rightSum := make([]int, len(nums))
 	length := len(nums) - 1
 	sum := 0
 	pivotIndex := -1
 
-	// Calculate left running sum
-	for i := 0; i < len(nums); i++ {
+	for i := range nums {
 		sum += nums[i]
 		leftSum[i] = sum
 	}
 
-	// Calculate right running sum
 	sum = 0
-	for i := 0; i < len(nums); i++ {
+	for range nums {
 		sum += nums[length]
 		rightSum[length] = sum
 		length--
 	}
 
-	// Find pivot where left sum equals right sum
-	for i := 0; i < len(nums); i++ {
+	for i := range nums {
 		if leftSum[i] == rightSum[i] {
 			pivotIndex = i
 			break
@@ -34,7 +31,29 @@ func pivotIndex(nums []int) int {
 	return pivotIndex
 }
 
+func pivotIndexV2(nums []int) int {
+	total := 0
+	leftSum := 0
+
+	// Calculate total sum first
+	for _, num := range nums {
+		total += num
+	}
+
+	// Check each index
+	for i := range nums {
+		total -= nums[i]
+		if leftSum == total {
+			return i
+		}
+		leftSum += nums[i]
+	}
+
+	return -1
+}
+
 func main() {
 	input := []int{1, 7, 3, 6, 5, 6}
-	fmt.Println(pivotIndex(input))
+	// fmt.Println(pivotIndexV1(input))
+	fmt.Println(pivotIndexV2(input))
 }
