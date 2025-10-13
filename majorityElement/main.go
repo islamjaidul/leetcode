@@ -23,7 +23,19 @@ func majorityElementV1(nums []int) int {
 	return result
 }
 
+func majorityElementV2(nums []int) int {
+	hashMap := make(map[int]int)
+	for _, num := range nums {
+		hashMap[num]++
+		if hashMap[num] > len(nums)/2 {
+			return num
+		}
+	}
+	return nums[0]
+}
+
 func main() {
 	input := []int{3, 2, 3, 2}
-	fmt.Println(majorityElementV1(input))
+	// fmt.Println(majorityElementV1(input))
+	fmt.Println(majorityElementV2(input))
 }
