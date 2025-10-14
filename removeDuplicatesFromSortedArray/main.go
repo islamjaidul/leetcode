@@ -3,12 +3,12 @@ package main
 import "fmt"
 
 func removeDuplicatesV1(nums []int) int {
-	// resultArr := make([]int, len(nums))
 	i := 0
-	temp := nums[0]
+	temp := -101
 
-	for num := range nums {
+	for _, num := range nums {
 		if num > temp {
+			temp = num
 			nums[i] = num
 			i++
 		}
@@ -19,7 +19,8 @@ func removeDuplicatesV1(nums []int) int {
 }
 
 func main() {
-	input := []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}
+	input := []int{-100, -99, -98, -98, -97, -97}
 	fmt.Println(removeDuplicatesV1(input))
+	fmt.Println(input)
 
 }
